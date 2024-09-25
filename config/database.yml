@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: imin
+  password: admin
+  host: localhost
+
+development:
+  <<: *default
+  database: venting_heartbreak_dev
+
+test:
+  <<: *default
+  database: venting_heartbreak_test
+
+production:
+  <<: *default
+  # database: venting_heartbreak_prod
+  # username: <%= ENV['MYAPP_DATABASE_USERNAME'] %>
+  # password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
