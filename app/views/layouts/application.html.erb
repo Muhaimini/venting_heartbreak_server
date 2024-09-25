@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YourAppName</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %> <!-- Important for importmap -->
+  </head>
+
+  <body>
+    <%= yield %> <!-- This will render the views -->
+  </body>
+</html>
