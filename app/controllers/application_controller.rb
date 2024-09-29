@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
 
     puts decoded
 
-    @current_admin = Admin.find_by(id: decoded["user_id"]) if decoded
-    render json: { message: "Unauthorized" }, status: :unauthorized unless @current_admin
+    @current_user = User.find_by(id: decoded["user_id"]) if decoded
+    render json: { message: "Unauthorized" }, status: :unauthorized unless @current_user
   end
 
   def not_found

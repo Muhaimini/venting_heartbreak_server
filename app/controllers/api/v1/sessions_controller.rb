@@ -1,9 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   def create
-    admin = Admin.find_by(name: params[:name])
-    if admin&.authenticate(params[:password])
+    user = User.find_by(username: params[:username])
+    if user&.authenticate(params[:password])
       # If authentication is successful
-      token = JsonWebToken.encode(user_id: admin.id)
+      token = JsonWebToken.encode(user_id: user.id)
       render json: { message: "Login successfully", token: token }, status: :ok
     else
       render json: { message: "Invalid credentials" }, status: :unauthorized

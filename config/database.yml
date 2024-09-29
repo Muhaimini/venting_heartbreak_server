@@ -5,6 +5,7 @@ default: &default
   username: imin
   password: admin
   host: localhost
+  port: 5432
 
 development:
   <<: *default
