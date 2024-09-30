@@ -4,25 +4,20 @@ Rails.application.routes.draw do
       # credential
       post "login", to: "sessions#create"
       delete "logout", to: "sessions#destroy"
-      # user gusts
-      resources :user_guests, only: [ :index, :show, :create, :update, :destroy ]
-      # roles
-      resources :roles, only: [ :index, :show, :create, :update, :destroy ]
-      # Subscriptions
+
+      resources :selected_invitations, only: [ :index, :show, :create, :update, :destroy ]
+      resources :invitation_comments, only: [ :index, :show, :create, :update, :destroy ]
+      resources :invitation_themes, only: [ :index, :show, :create, :update, :destroy ]
+      resources :story_timelines, only: [ :index, :show, :create, :update, :destroy ]
+      resources :special_guests, only: [ :index, :show, :create, :update, :destroy ]
       resources :subscriptions, only: [ :index, :show, :create, :update, :destroy ]
-      # Users
-      resources :users, only: [ :index, :show, :create, :update, :destroy ]
-      # admin services
+      resources :user_guests, only: [ :index, :show, :create, :update, :destroy ]
+      resources :theme_types, only: [ :index, :show, :create, :update, :destroy ]
       resources :admins, only: [ :index, :show, :create, :update, :destroy ]
+      resources :roles, only: [ :index, :show, :create, :update, :destroy ]
+      resources :users, only: [ :index, :show, :create, :update, :destroy ]
     end
   end
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  get "sample", to: "sample#data"
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
   # root "posts#index"

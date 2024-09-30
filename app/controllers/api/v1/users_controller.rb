@@ -21,6 +21,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    # Set default role_id if not provided in params. default role is user
     role_id = Role.find_by(id: "7e2aaef8-056a-453e-92a6-d647913c6267")&.id
     user.role_id ||= role_id
     if user.save

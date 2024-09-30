@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_30_095104) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_30_135814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -19,6 +19,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_095104) do
     t.string "name"
     t.string "password_digest"
     t.string "img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invitation_themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "creator_id", null: false
+    t.uuid "type_theme_id", null: false
+    t.string "label"
+    t.string "description"
+    t.string "img_cover"
+    t.string "song_src"
+    t.date "started_at"
+    t.date "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +45,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_095104) do
   create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.date "expired_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "theme_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

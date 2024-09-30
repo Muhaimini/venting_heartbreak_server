@@ -13,6 +13,6 @@ class ApplicationController < ActionController::API
   end
 
   def not_found
-    render json: { message: "404" }, status: :not_found, pretty: true
+    render json: { message: "please recheck endpoint url", status_code: 404 }, status: :not_found, pretty: true
   end
 end
