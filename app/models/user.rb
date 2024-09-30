@@ -1,24 +1,24 @@
 class User < ApplicationRecord
   has_one :subscription, dependent: :destroy
-  belongs_to :role
+  belongs_to :role, optional: true
 
   has_secure_password
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 5 }
 
-  # Override as_json to exclude password_digest
+  # Override as_json
   def as_json(options = {})
     super(options.merge(
       include: {
         role: {
-          only: [ :id, :value ]
-        },
-        subscription: {
-          only: [ :id, :expired_at ]
+          only: [ :value ] # :id, :value
         }
+        # subscription: {
+        #   only: [ :id, :expired_at ]
+        # }
       },
-      except: [ :password_digest, :role_id ]
+      except: [ :password_digest, :role_id, :subscription_id ]
     ))
   end
 end

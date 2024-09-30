@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       # credential
       post "login", to: "sessions#create"
       delete "logout", to: "sessions#destroy"
+      # user gusts
+      resources :user_guests, only: [ :index, :show, :create, :update, :destroy ]
       # roles
       resources :roles, only: [ :index, :show, :create, :update, :destroy ]
       # Subscriptions

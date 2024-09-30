@@ -21,6 +21,8 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
+    role_id = Role.find_by(id: "7e2aaef8-056a-453e-92a6-d647913c6267")&.id
+    user.role_id ||= role_id
     if user.save
       render json: user, status: :created
     else
