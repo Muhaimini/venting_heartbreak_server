@@ -1,4 +1,6 @@
 class Api::V1::InvitationThemesController < ApplicationController
+  PERMITTED_KEYS = %w[creator_id type_theme_id label description img_cover song_src started_at ended_at].freeze
+
   def index
     invitation_themes = InvitationTheme.includes(:user, :theme_type).all
     if invitation_themes
@@ -41,6 +43,14 @@ class Api::V1::InvitationThemesController < ApplicationController
 
   def destroy
   end
+
+  def validate_query_params
+    invalid_keys = params.keys - PERMITTED_KEYS
+    unless invalid_keys.empty?
+      render json: { message: "Invalid query parameters: #{invalid_keys.join(', ')}" }, status: :unprocessable_entity
+    end
+  end
+
   private
   def invitation_theme_params
     params.permit(

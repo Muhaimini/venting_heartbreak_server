@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invitation_theme_id: 
+  closed_at: 2024-10-01
+  published_at: 2024-10-01
+  primary_key_type=uuid: MyString
+
+two:
+  invitation_theme_id: 
+  closed_at: 2024-10-01
+  published_at: 2024-10-01
+  primary_key_type=uuid: MyString

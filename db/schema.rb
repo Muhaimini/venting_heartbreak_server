@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_30_135814) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_30_202203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,9 +23,26 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_135814) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitation_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "selected_invitation_id"
+    t.uuid "user_guest_id"
+    t.uuid "user_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invitation_special_guests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "selected_invitation_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invitation_themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "creator_id", null: false
-    t.uuid "type_theme_id", null: false
+    t.uuid "creator_id"
+    t.uuid "type_theme_id"
     t.string "label"
     t.string "description"
     t.string "img_cover"
@@ -38,6 +55,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_135814) do
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "selected_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "invitation_theme_id"
+    t.date "closed_at"
+    t.date "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "story_timelines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "selected_invitation_id"
+    t.string "title"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  selected_theme_id: 
+  title: MyString
+  description: MyString
+  primary_key_type: 
+  —skip-helper: MyString
+  —skip-template: MyString
+  —skip-template-engine: MyString
+  —skip-freamwork: MyString
+
+two:
+  selected_theme_id: 
+  title: MyString
+  description: MyString
+  primary_key_type: 
+  —skip-helper: MyString
+  —skip-template: MyString
+  —skip-template-engine: MyString
+  —skip-freamwork: MyString
