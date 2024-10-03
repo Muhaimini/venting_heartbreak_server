@@ -11,7 +11,8 @@ class InvitationTheme < ApplicationRecord
         creator: {
           only: [ :id, :username, :avatar, :initial_name, :label_color ]
         }
-      }
+      },
+      except: [ :creator_id, :type_theme_id ]
     ))
   end
 end
