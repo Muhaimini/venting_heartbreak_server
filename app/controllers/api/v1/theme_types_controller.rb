@@ -21,6 +21,13 @@ class Api::V1::ThemeTypesController < ApplicationController
   end
 
   def update
+    theme_type = ThemeType.find_by(id: params[:id])
+    if theme_type
+      theme_type.update(theme_type_params)
+      render json: { messgae: "Data successfully updated", data: theme_type }
+    else
+      render json: { message: "Failed to update" }, status: :not_found
+    end
   end
 
   def destroy
@@ -28,6 +35,6 @@ class Api::V1::ThemeTypesController < ApplicationController
 
   private
   def theme_type_params
-    params.permit(:value)
+    params.permit(:value, :img_cover)
   end
 end
