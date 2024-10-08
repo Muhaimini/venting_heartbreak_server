@@ -35,6 +35,6 @@ class Api::V1::ThemeTypesController < ApplicationController
 
   private
   def theme_type_params
-    params.permit(:value, :img_cover)
+    params.permit(:title, :description, :img_cover)
   end
 end
