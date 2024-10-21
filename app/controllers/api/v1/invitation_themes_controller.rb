@@ -1,8 +1,8 @@
 class Api::V1::InvitationThemesController < ApplicationController
-  PERMITTED_KEYS = %w[creator_id type_theme_id label description img_cover song_src started_at ended_at].freeze
+  PERMITTED_KEYS = %w[creator_id type_theme_id theme_layout_id label description img_cover song_src started_at ended_at].freeze
 
   def index
-    invitation_themes = InvitationTheme.includes(:creator, :theme_type).all
+    invitation_themes = InvitationTheme.includes(:creator, :theme_type, :theme_layout).all
     if invitation_themes
       render json: invitation_themes
     else
@@ -56,6 +56,7 @@ class Api::V1::InvitationThemesController < ApplicationController
     params.permit(
       :creator_id,
       :type_theme_id,
+      :theme_layout_id,
       :label,
       :description,
       :img_cover,

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :story_timelines, only: [ :index, :show, :create, :update, :destroy ]
       resources :special_guests, only: [ :index, :show, :create, :update, :destroy ]
       resources :subscriptions, only: [ :index, :show, :create, :update, :destroy ]
+      resources :theme_layouts, only: [ :index, :show, :create, :update, :destroy ]
       resources :user_guests, only: [ :index, :show, :create, :update, :destroy ]
       resources :theme_types, only: [ :index, :show, :create, :update, :destroy ]
       resources :admins, only: [ :index, :show, :create, :update, :destroy ]

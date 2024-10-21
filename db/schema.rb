@@ -10,40 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_08_151315) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_21_170446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "admins", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
+    t.string "name", null: false
+    t.string "password_digest", null: false
     t.string "img"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "invitation_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "selected_invitation_id"
+    t.uuid "selected_invitation_id", null: false
     t.uuid "user_guest_id"
     t.uuid "user_id"
-    t.string "text"
+    t.string "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "invitation_special_guests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "selected_invitation_id"
-    t.string "name"
+    t.uuid "selected_invitation_id", null: false
+    t.string "name", null: false
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "invitation_themes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "creator_id"
-    t.uuid "type_theme_id"
-    t.string "label"
+    t.uuid "creator_id", null: false
+    t.uuid "type_theme_id", null: false
+    t.string "label", null: false
     t.string "description"
     t.string "img_cover"
     t.string "song_src"
@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_151315) do
     t.date "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "theme_layout_id"
   end
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_151315) do
   end
 
   create_table "selected_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "invitation_theme_id"
+    t.uuid "invitation_theme_id", null: false
     t.date "closed_at"
     t.date "published_at"
     t.datetime "created_at", null: false
@@ -68,41 +69,47 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_151315) do
   end
 
   create_table "story_timelines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "selected_invitation_id"
-    t.string "title"
-    t.string "description"
+    t.uuid "selected_invitation_id", null: false
+    t.string "title", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "subscriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id"
+    t.uuid "user_id", null: false
     t.date "expired_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "theme_layouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "theme_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title", null: false
+    t.string "description"
+    t.string "img_cover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "img_cover"
-    t.string "description", null: false
   end
 
   create_table "user_guests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "device_id"
-    t.uuid "role_id"
+    t.string "device_id", null: false
+    t.uuid "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "subscription_id"
-    t.string "role_id"
-    t.string "username"
-    t.string "email"
-    t.string "password_digest"
+    t.string "role_id", null: false
+    t.string "username", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "avatar"
     t.string "initial_name"
     t.string "label_color"

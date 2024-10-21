@@ -1,7 +1,7 @@
 class CreateSubscriptions < ActiveRecord::Migration[7.2]
   def change
     create_table :subscriptions, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
-      t.uuid :user_id
+      t.uuid :user_id, null: false
       t.date :expired_at
       t.timestamps
     end
