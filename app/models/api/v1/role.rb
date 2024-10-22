@@ -1,4 +1,4 @@
-class Role < ApplicationRecord
+class Api::V1::Role < ApplicationRecord
   has_many :users
   has_many :user_guests
   validates :value, presence: true, uniqueness: true

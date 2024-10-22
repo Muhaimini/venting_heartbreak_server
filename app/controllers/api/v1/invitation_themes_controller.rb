@@ -2,7 +2,7 @@ class Api::V1::InvitationThemesController < ApplicationController
   PERMITTED_KEYS = %w[creator_id type_theme_id theme_layout_id label description img_cover song_src started_at ended_at].freeze
 
   def index
-    invitation_themes = InvitationTheme.includes(:creator, :theme_type, :theme_layout).all
+    invitation_themes = Api::V1::InvitationTheme.includes(:creator, :theme_type, :theme_layout).all
     if invitation_themes
       render json: invitation_themes
     else
@@ -11,7 +11,7 @@ class Api::V1::InvitationThemesController < ApplicationController
   end
 
   def show
-    invitation_theme = InvitationTheme.find_by(id: params[:id])
+    invitation_theme = Api::V1::InvitationTheme.find_by(id: params[:id])
     if invitation_theme
       render json: invitation_theme
     else
@@ -20,7 +20,7 @@ class Api::V1::InvitationThemesController < ApplicationController
   end
 
   def create
-    invitation_theme = InvitationTheme.new(invitation_theme_params)
+    invitation_theme = Api::V1::InvitationTheme.new(invitation_theme_params)
     if invitation_theme.save
       render json: invitation_theme, status: :created
     else
@@ -32,7 +32,7 @@ class Api::V1::InvitationThemesController < ApplicationController
   end
 
   def update
-    invitation_theme = InvitationTheme.find_by(id: params[:id])
+    invitation_theme = Api::V1::InvitationTheme.find_by(id: params[:id])
     if invitation_theme
       invitation_theme.update(invitation_theme_params)
       render json: { messgae: "Data successfully updated", data: invitation_theme }

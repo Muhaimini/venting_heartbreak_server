@@ -6,7 +6,7 @@ class Api::V1::SpecialGuestsController < ApplicationController
   end
 
   def create
-    special_guest = InvitationSpecialGuest.new(special_guest_params)
+    special_guest = Api::V1::InvitationSpecialGuest.new(special_guest_params)
     if special_guest.save
       render json: special_guest, status: :created
     else

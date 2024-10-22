@@ -2,7 +2,7 @@ class Api::V1::AdminsController < ApplicationController
   before_action :authorize_request, except: [ :create ]
 
   def index
-    admins = Admin.all
+    admins = Api::V1::Admin.all
     if admins
       render json: admins
     else
@@ -11,7 +11,7 @@ class Api::V1::AdminsController < ApplicationController
   end
 
   def show
-    admin = Admin.find_by(id: params[:id])
+    admin = Api::V1::Admin.find_by(id: params[:id])
     if admin
       render json: admin
     else
@@ -20,7 +20,7 @@ class Api::V1::AdminsController < ApplicationController
   end
 
   def create
-    admin = Admin.new(admin_params)
+    admin = Api::V1::Admin.new(admin_params)
     if admin.save
       render json: admin, status: :created
     else
@@ -29,7 +29,7 @@ class Api::V1::AdminsController < ApplicationController
   end
 
   def update
-    admin = Admin.find_by(id: params[:id])
+    admin = Api::V1::Admin.find_by(id: params[:id])
     if admin
       admin.update(admin_params)
       render json: { messgae: "Data successfully updated", data: admin }
@@ -39,7 +39,7 @@ class Api::V1::AdminsController < ApplicationController
   end
 
   def destroy
-    admin = Admin.find_by(id: params[:id])
+    admin = Api::V1::Admin.find_by(id: params[:id])
     if admin
       admin.destroy
       render json: { messgae: "Data successfully deleted" }

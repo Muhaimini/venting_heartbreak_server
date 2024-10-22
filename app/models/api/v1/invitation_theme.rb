@@ -1,4 +1,4 @@
-class InvitationTheme < ApplicationRecord
+class Api::V1::InvitationTheme < ApplicationRecord
   # belongs_to :user, foreign_key: "creator_id", optional: true
   belongs_to :creator, class_name: "User", foreign_key: "creator_id", optional: true
   belongs_to :theme_type, foreign_key: "type_theme_id", optional: true

@@ -1,4 +1,4 @@
-class Subscription < ApplicationRecord
+class Api::V1::Subscription < ApplicationRecord
   belongs_to :user
 
   validates :user_id, presence: true

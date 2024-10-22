@@ -2,7 +2,7 @@ class Api::V1::RolesController < ApplicationController
   before_action :authorize_request, except: [ :index, :create ]
 
   def index
-    roles = Role.all
+    roles = Api::V1::Role.all
     if roles
       render json: roles
     else
@@ -11,7 +11,7 @@ class Api::V1::RolesController < ApplicationController
   end
 
   def show
-    role = Role.find_by(id: params[:id])
+    role = Api::V1::Role.find_by(id: params[:id])
     if role
       render json: role
     else
@@ -20,7 +20,7 @@ class Api::V1::RolesController < ApplicationController
   end
 
   def create
-    role = Role.new(role_params)
+    role = Api::V1::Role.new(role_params)
     if role.save
       render json: role, status: :created
     else
@@ -29,7 +29,7 @@ class Api::V1::RolesController < ApplicationController
   end
 
   def update
-    role = Role.find_by(id: params[:id])
+    role = Api::V1::Role.find_by(id: params[:id])
     if role
       role.update(role_params)
       render json: { messgae: "Data successfully updated", data: role }
@@ -39,7 +39,7 @@ class Api::V1::RolesController < ApplicationController
   end
 
   def destroy
-    role = Role.find_by(id: params[:id])
+    role = Api::V1::Role.find_by(id: params[:id])
     if role
       role.destroy
       render json: { messgae: "Data successfully deleted" }

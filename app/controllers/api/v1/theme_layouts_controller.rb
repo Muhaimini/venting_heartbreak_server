@@ -1,6 +1,6 @@
 class Api::V1::ThemeLayoutsController < ApplicationController
   def index
-    theme_layouts = ThemeLayout.all
+    theme_layouts = Api::V1::ThemeLayout.all
     if theme_layouts
       render json: theme_layouts
     else
@@ -12,7 +12,7 @@ class Api::V1::ThemeLayoutsController < ApplicationController
   end
 
   def create
-    theme_layout = ThemeLayout.new(theme_layout_params)
+    theme_layout = Api::V1::ThemeLayout.new(theme_layout_params)
     if theme_layout.save
       render json: theme_layout, status: :created
     else
@@ -21,7 +21,7 @@ class Api::V1::ThemeLayoutsController < ApplicationController
   end
 
   def update
-    theme_layout = ThemeLayout.find_by(id: params[:id])
+    theme_layout = Api::V1::ThemeLayout.find_by(id: params[:id])
     if theme_layout
       theme_layout.update(theme_layout_params)
       render json: { messgae: "Data successfully updated", data: theme_layout }

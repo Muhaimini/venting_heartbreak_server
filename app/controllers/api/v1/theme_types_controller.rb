@@ -1,6 +1,6 @@
 class Api::V1::ThemeTypesController < ApplicationController
   def index
-    theme_types = ThemeType.all
+    theme_types = Api::V1::ThemeType.all
     if theme_types
       render json: theme_types
     else
@@ -12,7 +12,7 @@ class Api::V1::ThemeTypesController < ApplicationController
   end
 
   def create
-    theme_type = ThemeType.new(theme_type_params)
+    theme_type = Api::V1::ThemeType.new(theme_type_params)
     if theme_type.save
       render json: theme_type, status: :created
     else
@@ -21,7 +21,7 @@ class Api::V1::ThemeTypesController < ApplicationController
   end
 
   def update
-    theme_type = ThemeType.find_by(id: params[:id])
+    theme_type = Api::V1::ThemeType.find_by(id: params[:id])
     if theme_type
       theme_type.update(theme_type_params)
       render json: { messgae: "Data successfully updated", data: theme_type }

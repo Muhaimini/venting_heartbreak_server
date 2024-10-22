@@ -2,7 +2,7 @@ class Api::V1::UserGuestsController < ApplicationController
   before_action :authorize_request, except: [ :create, :show ]
 
   def index
-    user_guests = UserGuest.includes(:role).all
+    user_guests = Api::V1::UserGuest.includes(:role).all
     if user_guests
       render json: user_guests
     else
@@ -14,8 +14,8 @@ class Api::V1::UserGuestsController < ApplicationController
   end
 
   def create
-    user_guest = UserGuest.new(user_guest_params)
-    role_id = Role.find_by(id: "a15133ad-b2c5-4cfc-9a30-6e516405a693")&.id
+    user_guest = Api::V1::UserGuest.new(user_guest_params)
+    role_id = Api::V1::Role.find_by(value: "user_guest")&.id
     user_guest.role_id ||= role_id
     if user_guest.save
       render json: user_guest, status: :created
@@ -28,7 +28,7 @@ class Api::V1::UserGuestsController < ApplicationController
   end
 
   def destroy
-    user_guest = UserGuest.find_by(id: params[:id])
+    user_guest = Api::V1::UserGuest.find_by(id: params[:id])
     if user_guest
       user_guest.destroy
       render json: { messgae: "Data successfully deleted" }

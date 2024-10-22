@@ -3,7 +3,7 @@ class Api::V1::InvitationCommentsController < ApplicationController
   end
 
   def show
-    invitation_comments = InvitationComment.where(selected_invitation_id: params[:id])
+    invitation_comments = Api::V1::InvitationComment.where(selected_invitation_id: params[:id])
     if invitation_comments
       render json: invitation_comments
     else
@@ -12,7 +12,7 @@ class Api::V1::InvitationCommentsController < ApplicationController
   end
 
   def create
-    invitation_comment = InvitationComment.new(invitation_comment_params)
+    invitation_comment = Api::V1::InvitationComment.new(invitation_comment_params)
     if invitation_comment.save
       render json: invitation_comment, status: :created
     else

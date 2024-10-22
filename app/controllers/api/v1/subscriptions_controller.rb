@@ -2,7 +2,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   before_action :authorize_request
 
   def index
-    subscriptions = Subscription.all
+    subscriptions = Api::V1::Subscription.all
     if subscriptions
       render json: subscriptions
     else
@@ -11,7 +11,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def show
-    subscription = Subscription.find_by(id: params[:id])
+    subscription = Api::V1::Subscription.find_by(id: params[:id])
     if subscription
       render json: subscription
     else
@@ -20,8 +20,8 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def create
-    subscription = Subscription.new(subscription_params)
-    user = User.find_by(id: params[:user_id])
+    subscription = Api::V1::Subscription.new(subscription_params)
+    user = Api::V1::User.find_by(id: params[:user_id])
 
     if user.nil?
       render json: { message: "Failed to create subscription account. User not found" }, status: :not_found
@@ -40,7 +40,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def update
-    subscription = Subscription.find_by(id: params[:id])
+    subscription = Api::V1::Subscription.find_by(id: params[:id])
     if subscription
       subscription.update(subscription_params)
       render json: { messgae: "Data successfully updated", data: subscription }
@@ -50,7 +50,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   end
 
   def destroy
-    subscription = Subscription.find_by(id: params[:id])
+    subscription = Api::V1::Subscription.find_by(id: params[:id])
     if subscription
       subscription.destroy
       render json: { messgae: "Data successfully deleted" }

@@ -3,7 +3,7 @@ class Api::V1::SelectedInvitationsController < ApplicationController
   end
 
   def show
-    selected_invitation = SelectedInvitation.find_by(id: params[:id])
+    selected_invitation = Api::V1::SelectedInvitation.find_by(id: params[:id])
     if selected_invitation
       render json: selected_invitation
     else
@@ -12,7 +12,7 @@ class Api::V1::SelectedInvitationsController < ApplicationController
   end
 
   def create
-    selected_invitation = SelectedInvitation.new(selected_invitation_params)
+    selected_invitation = Api::V1::SelectedInvitation.new(selected_invitation_params)
     if selected_invitation.save
       render json: selected_invitation, status: :created
     else

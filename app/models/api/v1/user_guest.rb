@@ -1,4 +1,4 @@
-class UserGuest < ApplicationRecord
+class Api::V1::UserGuest < ApplicationRecord
   belongs_to :role, optional: true
 
   validates :device_id, presence: true, uniqueness: true

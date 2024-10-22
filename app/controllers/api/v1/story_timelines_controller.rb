@@ -6,7 +6,7 @@ class Api::V1::StoryTimelinesController < ApplicationController
   end
 
   def create
-    story_timeline = StoryTimeline.new(story_timeline_params)
+    story_timeline = Api::V1::StoryTimeline.new(story_timeline_params)
     if story_timeline.save
       render json: story_timeline, status: :created
     else
