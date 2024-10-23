@@ -13,7 +13,7 @@ gem "puma", ">= 5.0"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-gem "activerecord", "~> 7.0"
+gem "activerecord", "~> 7.2"
 gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
