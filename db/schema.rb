@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_075932) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_23_203952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,11 +23,39 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_075932) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitation_assets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "selected_invitation_id", null: false
+    t.string "cover_title"
+    t.string "cover_img"
+    t.string "color_bg"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invitation_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "selected_invitation_id", null: false
     t.uuid "user_guest_id"
     t.uuid "user_id"
     t.string "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invitation_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.integer "size", null: false
+    t.string "filename", null: false
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invitation_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "invitation_asset_id", null: false
+    t.uuid "invitation_media_id", null: false
+    t.integer "index", default: 1, null: false
+    t.string "subtitle"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,10 +91,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_075932) do
   create_table "selected_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "invitation_theme_id", null: false
     t.date "closed_at"
-    t.date "published_at", null: false
+    t.date "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "selected_by", null: false
+    t.uuid "selected_by"
     t.uuid "asset_id"
   end
 
@@ -95,6 +123,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_075932) do
     t.string "title", null: false
     t.string "description"
     t.string "img_cover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "timeline_setions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "story_timeline_id", null: false
+    t.uuid "invitation_media_id", null: false
+    t.string "subtitle"
+    t.uuid "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

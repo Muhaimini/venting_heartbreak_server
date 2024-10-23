@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  story_timeline_id: 
+  media_id: 
+  subtitle: MyString
+  description: 
+
+two:
+  story_timeline_id: 
+  media_id: 
+  subtitle: MyString
+  description: 

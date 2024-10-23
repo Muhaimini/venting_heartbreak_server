@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  selected_invitation_id: 
+  cover_title: MyString
+  cover_img: MyString
+  color_bg: MyString
+
+two:
+  selected_invitation_id: 
+  cover_title: MyString
+  cover_img: MyString
+  color_bg: MyString
