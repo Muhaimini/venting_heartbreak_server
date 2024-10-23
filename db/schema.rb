@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_203952) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_23_215633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -95,7 +95,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_203952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "selected_by"
-    t.uuid "asset_id"
   end
 
   create_table "story_timelines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -127,7 +126,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_203952) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "timeline_setions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "timeline_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "story_timeline_id", null: false
     t.uuid "invitation_media_id", null: false
     t.string "subtitle"

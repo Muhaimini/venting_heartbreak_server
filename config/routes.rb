@@ -4,10 +4,14 @@ Rails.application.routes.draw do
       # credential
       post "login", to: "sessions#create"
       delete "logout", to: "sessions#destroy"
-
+      
       resources :selected_invitations, only: [ :index, :show, :create, :update, :destroy ]
       resources :invitation_comments, only: [ :index, :show, :create, :update, :destroy ]
       resources :invitation_themes, only: [ :index, :show, :create, :update, :destroy ]
+      resources :invitation_medias, only: [ :index, :show, :create, :update, :destroy ]
+      resources :invitation_assets, only: [ :index, :show, :create, :update, :destroy ]
+      resources :invitation_pages, only: [ :index, :show, :create, :update, :destroy ]
+      resources :timeline_sections, only: [ :index, :show, :create, :update, :destroy ]
       resources :story_timelines, only: [ :index, :show, :create, :update, :destroy ]
       resources :special_guests, only: [ :index, :show, :create, :update, :destroy ]
       resources :subscriptions, only: [ :index, :show, :create, :update, :destroy ]

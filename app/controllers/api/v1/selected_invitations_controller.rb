@@ -1,5 +1,7 @@
 class Api::V1::SelectedInvitationsController < ApplicationController
   def index
+    selected_invitations = filter_selected_invitations
+    render json: { data: selected_invitations }
   end
 
   def show
@@ -27,11 +29,17 @@ class Api::V1::SelectedInvitationsController < ApplicationController
   end
 
   private
+
+  def filter_selected_invitations
+    invitations = Api::V1::SelectedInvitation.all
+    invitations = invitations.selected_by(params[:selected_by]) if params[:selected_by].present?
+    invitations
+  end
+
   def selected_invitation_params
     params.permit(
       :invitation_theme_id,
       :selected_by,
-      :asset_id,
       :closed_at,
       :published_at
     )

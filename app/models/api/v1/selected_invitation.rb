@@ -1,4 +1,6 @@
 class Api::V1::SelectedInvitation < ApplicationRecord
+  scope :selected_by, ->(selected_by) { where(selected_by: selected_by) }
+  
   belongs_to :invitation_theme, foreign_key: "invitation_theme_id"
   has_many :story_timelines, foreign_key: "selected_invitation_id"
   has_many :invitation_special_guests, foreign_key: "selected_invitation_id"
