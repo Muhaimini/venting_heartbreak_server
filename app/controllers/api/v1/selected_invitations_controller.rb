@@ -30,6 +30,8 @@ class Api::V1::SelectedInvitationsController < ApplicationController
   def selected_invitation_params
     params.permit(
       :invitation_theme_id,
+      :selected_by,
+      :asset_id,
       :closed_at,
       :published_at
     )

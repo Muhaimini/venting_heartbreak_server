@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_21_154626) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_23_075932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -63,9 +63,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_154626) do
   create_table "selected_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "invitation_theme_id", null: false
     t.date "closed_at"
-    t.date "published_at"
+    t.date "published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "selected_by", null: false
+    t.uuid "asset_id"
   end
 
   create_table "story_timelines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
