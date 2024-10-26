@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_23_215633) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_26_012210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_215633) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitation_desks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "status", limit: 2, default: 0, null: false
+    t.uuid "creator_id", null: false
+    t.uuid "invitation_layout_id"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "invitation_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "type", null: false
     t.integer "size", null: false
@@ -50,11 +59,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_215633) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "invitation_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "invitation_asset_id", null: false
-    t.uuid "invitation_media_id", null: false
-    t.integer "index", default: 1, null: false
-    t.string "subtitle"
+  create_table "invitation_sheets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "invitation_desk_id", null: false
+    t.uuid "creator_id", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,5 +162,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_23_215633) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "invitation_sheets", "invitation_desks"
   add_foreign_key "subscriptions", "users"
 end

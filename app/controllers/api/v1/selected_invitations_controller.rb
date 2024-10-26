@@ -1,7 +1,7 @@
 class Api::V1::SelectedInvitationsController < ApplicationController
   def index
     selected_invitations = filter_selected_invitations
-    render json: { data: selected_invitations }
+    render json: selected_invitations
   end
 
   def show
