@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :invitation_sheets, only: [ :index, :show, :create, :update, :destroy ]
       resources :invitation_desks, only: [ :index, :show, :create, :update, :destroy ]
 
+      resources :music_themes, only: [ :index, :show, :create, :update, :destroy ]
       resources :timeline_sections, only: [ :index, :show, :create, :update, :destroy ]
       resources :story_timelines, only: [ :index, :show, :create, :update, :destroy ]
       resources :special_guests, only: [ :index, :show, :create, :update, :destroy ]

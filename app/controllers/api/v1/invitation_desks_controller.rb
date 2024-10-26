@@ -43,7 +43,7 @@ class Api::V1::InvitationDesksController < ApplicationController
   private
 
   def get_invitation_desk
-    Api::V1::InvitationDesk.find_by(id: params[:id])
+    Api::V1::InvitationDesk.includes(:music_theme).find_by(id: params[:id])
   end
 
   def filter_invitation_desks
@@ -53,10 +53,10 @@ class Api::V1::InvitationDesksController < ApplicationController
   end
 
   def update_invitation_desk_params
-    params.permit(:invitation_layout_id, :description)
+    params.permit(:invitation_layout_id, :description, :music_theme_id)
   end
 
   def invitation_desk_params
-    params.permit(:invitation_layout_id, :description, :creator_id)
+    params.permit(:invitation_layout_id, :description, :creator_id, :music_theme_id)
   end
 end
