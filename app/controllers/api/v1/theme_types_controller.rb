@@ -22,8 +22,7 @@ class Api::V1::ThemeTypesController < ApplicationController
 
   def update
     theme_type = Api::V1::ThemeType.find_by(id: params[:id])
-    if theme_type
-      theme_type.update(theme_type_params)
+    if theme_type.update(theme_type_params)
       render json: { messgae: "Data successfully updated", data: theme_type }
     else
       render json: { message: "Failed to update" }, status: :not_found

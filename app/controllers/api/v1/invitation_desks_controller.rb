@@ -14,7 +14,7 @@ class Api::V1::InvitationDesksController < ApplicationController
   end
 
   def show
-    invitation_desk = Api::V1::InvitationDesk.find_by(id: params[:id])
+    invitation_desk = get_invitation_desk
     if invitation_desk
       render json: invitation_desk
     else
@@ -22,12 +22,38 @@ class Api::V1::InvitationDesksController < ApplicationController
     end
   end
 
+  def update
+    invitation_desk = get_invitation_desk
+    if invitation_desk.update(update_invitation_desk_params)
+      render json: invitation_desk
+    else
+      render json: { message: "Desk failed to updated" }, status: :not_found
+    end
+  end
+
+  def destroy
+    invitation_desk = get_invitation_desk
+    if invitation_desk.destroy
+      render json: { message: "Desk successfully deleted" }
+    else
+      render json: { message: "Desk not found" }, status: :not_found
+    end
+  end
+
   private
+
+  def get_invitation_desk
+    Api::V1::InvitationDesk.find_by(id: params[:id])
+  end
 
   def filter_invitation_desks
     invitation_desks = Api::V1::InvitationDesk.all
     invitation_desks = invitation_desks.created_by(params[:creator_id]) if params[:creator_id].present?
     invitation_desks
+  end
+
+  def update_invitation_desk_params
+    params.permit(:invitation_layout_id, :description)
   end
 
   def invitation_desk_params
