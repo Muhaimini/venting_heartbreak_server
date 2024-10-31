@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 # CI
 gem "importmap-rails"
-gem "rails", "~> 7.2.1"
+gem "rails", "~> 7.2.2"
 gem "pg"
 gem "puma", ">= 5.0"
 
